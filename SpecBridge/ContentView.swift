@@ -91,7 +91,7 @@ struct StreamingView: View {
             .cornerRadius(12)
             
             // Status Info
-            VStack {
+            VStack(spacing: 4) {
                 Text("Glasses: \(streamManager.status)")
                 Text("Twitch: \(twitchManager.connectionStatus)")
                     .bold()
@@ -99,7 +99,7 @@ struct StreamingView: View {
                 HStack {
                     Image(systemName: twitchManager.isAudioEnabled ? "mic.fill" : "mic.slash.fill")
                         .foregroundStyle(twitchManager.isAudioEnabled ? .blue : .gray)
-                    Text(twitchManager.isAudioEnabled ? "iPhone Mic: On" : "iPhone Mic: Off")
+                    Text("Mic: \(twitchManager.audioStatus)")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
