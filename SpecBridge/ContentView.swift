@@ -96,6 +96,13 @@ struct StreamingView: View {
                 Text("Twitch: \(twitchManager.connectionStatus)")
                     .bold()
                     .foregroundStyle(twitchManager.isBroadcasting ? .green : .red)
+                HStack {
+                    Image(systemName: twitchManager.isAudioEnabled ? "mic.fill" : "mic.slash.fill")
+                        .foregroundStyle(twitchManager.isAudioEnabled ? .blue : .gray)
+                    Text(twitchManager.isAudioEnabled ? "iPhone Mic: On" : "iPhone Mic: Off")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
             
             HStack {
@@ -114,7 +121,19 @@ struct StreamingView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(streamManager.isStreaming ? .red : .green)
-                
+
+                // Audio toggle button
+                Button {
+                    Task {
+                        await twitchManager.toggleAudio()
+                    }
+                } label: {
+                    Image(systemName: twitchManager.isAudioEnabled ? "mic.fill" : "mic.slash.fill")
+                        .font(.title2)
+                }
+                .buttonStyle(.bordered)
+                .tint(twitchManager.isAudioEnabled ? .blue : .gray)
+
                 Button("Logout") {
                     onLogout()
                 }

@@ -22,7 +22,7 @@ class StreamManager: ObservableObject {
         let session = AVAudioSession.sharedInstance()
         do {
             // Sets iOS to allow Bluetooth audio (prevents "Video Paused" error)
-            try session.setCategory(.playAndRecord, mode: .default, options: [.allowBluetooth, .allowBluetoothA2DP, .defaultToSpeaker])
+            try session.setCategory(.playAndRecord, mode: .default, options: [.allowBluetoothA2DP, .defaultToSpeaker, .mixWithOthers])
             try session.setActive(true)
             print("Audio session configured successfully")
         } catch {
